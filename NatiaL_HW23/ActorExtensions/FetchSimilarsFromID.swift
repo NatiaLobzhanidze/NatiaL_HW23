@@ -20,7 +20,6 @@ extension CustomEvent {
         semaphore.signal()
     }
     
-    
     // randomly choose tvShow and fetch similar tvShows
     
     func fetchSimilarTvShows() {

@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 extension CustomEvent {
-    
     func fetchTvShows() {
         semaphore.wait()
         api.getData(from:"https://api.themoviedb.org/3/tv/top_rated?" ) { (result:Result<TvShowResponse, Error>) in

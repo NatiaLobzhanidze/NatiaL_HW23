@@ -8,7 +8,7 @@
 import Foundation
 extension CustomEvent {
     
-    func getRendomElement (from arr: [SimilarTvShows]) {
+    func getRendomElement (from arr: [SimilarTvShows])  {
         semaphore.wait()
         
         if let elem = arr.randomElement() {
@@ -34,7 +34,7 @@ extension CustomEvent {
                 self.semaphore.signal()
             }
         }
-        semaphore.wait()
-        semaphore.signal()
+       
+       
     }
 }
