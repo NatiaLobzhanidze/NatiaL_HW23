@@ -31,6 +31,7 @@ extension CustomEvent {
                 self.semaphore.signal()
             case .failure(let failure):
                 print(failure.localizedDescription)
+                self.semaphore.signal()
             }
         }
         semaphore.wait()

@@ -21,8 +21,5 @@ actor CustomEvent {
     var movieID = 0
     var detailsId = 0
     
-    
-  
-   
 }
 

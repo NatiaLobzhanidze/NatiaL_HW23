@@ -6,9 +6,6 @@
 //
 
 import UIKit
-
-
-
 class ViewController: UIViewController {
     
     var apiManager = APIManager()
@@ -25,8 +22,6 @@ class ViewController: UIViewController {
                 await self.getDetails()
             }
         }
-        
-        
     }
     
     func fetchedMoviesAndGetRandom() async {
