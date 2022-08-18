@@ -8,9 +8,10 @@
 import UIKit
 class ViewController: UIViewController {
     
-    var apiManager = APIManager()
     
     let actorEvent = CustomEvent()
+    
+    var tvResult = [TvShows]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,33 +19,26 @@ class ViewController: UIViewController {
         DispatchQueue.global().async {
             Task {
                 await self.fetchedMoviesAndGetRandom()
-                await self.getSimilars()
-                await self.getDetails()
+               
             }
         }
     }
     
     func fetchedMoviesAndGetRandom() async {
         print(1)
-        await actorEvent.fetchTvShows()
-        let res = await actorEvent.tvResult
-        await actorEvent.getRendomElement(from: res)
         
+        let tvShowResult =  try? await actorEvent.fetchTvShows(from: "https://api.themoviedb.org/3/tv/top_rated?")
+        let similarsUrl =  await actorEvent.getSimilarsUrl(from: tvShowResult!.results)
+        let similarsArray = try? await actorEvent.fetchSimilarTvShows(with: similarsUrl)
+        let detailsUrl = await actorEvent.getDetailsURl(from: similarsArray!.results)
+        let details = try? await actorEvent.fetchDetails(with: detailsUrl)
+        
+        print(1.1, details)
     }
     
-    func getSimilars() async {
-        print(2, await actorEvent.movieID)
-        
-        await actorEvent.fetchSimilarTvShows()
-        await actorEvent.getRendomElement(from: actorEvent.similartvResult)
-        print(await actorEvent.detailsId)
-    }
+  
     
-    func getDetails() async {
-        print(3)
-        await actorEvent.fetchDetails()
-        
-    }
+  
     
 }
 

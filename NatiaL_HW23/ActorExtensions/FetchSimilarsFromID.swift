@@ -6,39 +6,35 @@
 //
 
 import Foundation
+// randomly choose tvShow and fetch similar tvShows
+
 extension CustomEvent {
     
-    func getRendomElement (from arr: [TvShows]) {
-       
-        if let elem = arr.randomElement() {
-            self.movieID = elem.id
-            print(self.movieID)
-           
-        }
+    func getSimilarsUrl (from arr: [TvShows]) async -> String {
         
-     
+        if let elem = arr.randomElement() {
+            return  "https://api.themoviedb.org/3/tv/\(elem.id)/similar?"
+        } else {
+            return "https://api.themoviedb.org/3/tv/\(0)/similar?"
+        }
     }
     
-    // randomly choose tvShow and fetch similar tvShows
-    
-    func fetchSimilarTvShows() {
+    func fetchSimilarTvShows(with strUrl: String) async throws -> SimilarResponse? {
         
-      
-        api.getData(from: "https://api.themoviedb.org/3/tv/\(movieID)/similar?") { (result:Result<SimilarResponse, Error>) in
-            
-            switch result {
-            case  .success( let success ):
-                
-                self.similartvResult = success.results
-                print("Similar TvShows", success.results)
-                
-            case let .failure(failure):
-                
-                print("errors error",failure.localizedDescription)
-            }
-            
+        var urlComponent = URLComponents(string: strUrl)
+        urlComponent?.queryItems = [
+            URLQueryItem.init(name: "api_key", value: "a0aba78a00d2acb51bf5318879fcfa07")]
+        let url = URL(string: strUrl)
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        
+        let( data, response) =  try await URLSession.shared.data(from: (urlComponent?.url)!)
+        
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            print("NetworkError.dataNotFound")
+            throw NetworkError.dataNotFound
         }
-        
+        return try JSONDecoder().decode(SimilarResponse.self, from: data)
     }
     
 }

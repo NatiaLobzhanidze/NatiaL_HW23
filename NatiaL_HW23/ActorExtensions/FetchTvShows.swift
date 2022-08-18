@@ -7,23 +7,26 @@
 
 import Foundation
 import UIKit
+
 extension CustomEvent {
-    func fetchTvShows() {
+    func fetchTvShows(from strUrl: String) async throws -> TvShowResponse? {
+        
+        var urlComponent = URLComponents(string: strUrl)
+         urlComponent?.queryItems = [
+             URLQueryItem.init(name: "api_key", value: "a0aba78a00d2acb51bf5318879fcfa07")
+         
+         ]
+         let url = URL(string: strUrl)
+         var request = URLRequest(url: url!)
+         request.httpMethod = "GET"
      
-        api.getData(from:"https://api.themoviedb.org/3/tv/top_rated?" ) { (result:Result<TvShowResponse, Error>) in
-            
-            switch result {
-            case .success(let success):
-                self.tvResult = success.results
-                print("fetchTvResult",self.tvResult)
-               
-            case .failure(let failure):
-                print(failure.localizedDescription)
-               
-            }
-            
-        }
-      
+        let( data, response) =  try await URLSession.shared.data(from: (urlComponent?.url)!)
+       
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            print("NetworkError.dataNotFound")
+             throw NetworkError.dataNotFound
+           }
+        return try JSONDecoder().decode(TvShowResponse.self, from: data)
         
     }
     

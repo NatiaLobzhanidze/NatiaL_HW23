@@ -10,16 +10,11 @@ import UIKit
 
 actor CustomEvent {
     
-    let semaphore = DispatchSemaphore(value: 1)
+    enum NetworkError: Error {
+        case dataNotFound
+    }
     
-    let api = APIManager()
-    
-    var tvResult = [TvShows]()
-    var similartvResult = [SimilarTvShows]()
-    var details = [Details]()
-    
-    var movieID = 0
-    var detailsId = 0
+ 
     
 }
 

@@ -8,33 +8,31 @@
 import Foundation
 extension CustomEvent {
     
-    func getRendomElement (from arr: [SimilarTvShows])  {
-        semaphore.wait()
+    func getDetailsURl(from arr: [SimilarTvShows]) async -> String  {
         
         if let elem = arr.randomElement() {
-            self.detailsId = elem.id
-            semaphore.signal()
+            return "https://api.themoviedb.org/3/tv/\(elem.id)?"
+        } else {
+            return "https://api.themoviedb.org/3/tv/\(0)?"
         }
-        semaphore.wait()
-        semaphore.signal()
     }
     
-    func fetchDetails() {
-        semaphore.wait()
-        api.getData(from: "https://api.themoviedb.org/3/tv/\(detailsId)?") { (result:Result<DetailsResponse, Error>)  in
-            
-            switch result {
-            case  .success( let success):
-                
-                self.details = (success.created_by)
-                print( "details:", self.details)
-                self.semaphore.signal()
-            case .failure(let failure):
-                print(failure.localizedDescription)
-                self.semaphore.signal()
-            }
+    func fetchDetails(with strUrl: String) async throws -> DetailsResponse? {
+        
+        var urlComponent = URLComponents(string: strUrl)
+        urlComponent?.queryItems = [
+            URLQueryItem.init(name: "api_key", value: "a0aba78a00d2acb51bf5318879fcfa07")]
+        let url = URL(string: strUrl)
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        
+        let( data, response) =  try await URLSession.shared.data(from: (urlComponent?.url)!)
+        
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            print("NetworkError.dataNotFound")
+            throw NetworkError.dataNotFound
         }
-       
-       
+        return try JSONDecoder().decode(DetailsResponse.self, from: data)
+        
     }
 }
