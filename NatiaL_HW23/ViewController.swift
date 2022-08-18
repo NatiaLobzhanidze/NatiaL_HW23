@@ -25,21 +25,32 @@ class ViewController: UIViewController {
     }
     
     func fetchedMoviesAndGetRandom() async {
-        print(1)
+        print("Start")
         
-        let tvShowResult =  try? await actorEvent.fetchTvShows(from: "https://api.themoviedb.org/3/tv/top_rated?")
-        let similarsUrl =  await actorEvent.getSimilarsUrl(from: tvShowResult!.results)
-        let similarsArray = try? await actorEvent.fetchSimilarTvShows(with: similarsUrl)
-        let detailsUrl = await actorEvent.getDetailsURl(from: similarsArray!.results)
-        let details = try? await actorEvent.fetchDetails(with: detailsUrl)
+        let tvShowResult = try? await actorEvent.getData(from: "https://api.themoviedb.org/3/tv/top_rated?", isTvShow: true, isSimilarShow: false, isDetails: false)
+        let similarsUrl =  await actorEvent.getSimilarsUrl(from: (tvShowResult?.tvShows!.results)!)
         
-        print(1.1, details)
+        let similarsArray = try? await actorEvent.getData(from: similarsUrl, isTvShow: false, isSimilarShow: true, isDetails: false)
+        
+        let detailsUrl = await actorEvent.getDetailsURl(from: similarsArray!.similars!.results)
+        let details = try? await actorEvent.getData(from: detailsUrl, isTvShow: false, isSimilarShow: false, isDetails: true).details
+          printDetails(from: details)
+ 
+        print("End")
     }
     
-  
-    
-  
-    
+    @MainActor
+    func printDetails(from obj: DetailsResponse?) {
+        guard let detObj = obj else {
+            print("no details")
+            return }
+
+        print("Random Tv-Show details: \n name - \(detObj)" )
+
+
+    }
+ //   , let creatby = obj?.creator.first?.name, let episods = obj?.episodes
+    // \n created by: \(creatby) \n rating - \(episods)"
 }
 
 

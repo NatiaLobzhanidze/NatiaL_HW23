@@ -17,9 +17,6 @@
 		60746D2E28ABB9DD003A5BFB /* SameShowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60746D2D28ABB9DD003A5BFB /* SameShowModel.swift */; };
 		60746D3028ABBDE5003A5BFB /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60746D2F28ABBDE5003A5BFB /* DetailsModel.swift */; };
 		60746D3528ABC5F5003A5BFB /* ActorCustomEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60746D3428ABC5F5003A5BFB /* ActorCustomEvents.swift */; };
-		60746D3A28AC57DE003A5BFB /* FetchTvShows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60746D3928AC57DE003A5BFB /* FetchTvShows.swift */; };
-		60746D3D28AC5893003A5BFB /* FetchSimilarsFromID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60746D3C28AC5893003A5BFB /* FetchSimilarsFromID.swift */; };
-		60746D3F28AC58D0003A5BFB /* FetchDetailsFromSimilarByID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60746D3E28AC58D0003A5BFB /* FetchDetailsFromSimilarByID.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,9 +32,6 @@
 		60746D2D28ABB9DD003A5BFB /* SameShowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SameShowModel.swift; sourceTree = "<group>"; };
 		60746D2F28ABBDE5003A5BFB /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
 		60746D3428ABC5F5003A5BFB /* ActorCustomEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorCustomEvents.swift; sourceTree = "<group>"; };
-		60746D3928AC57DE003A5BFB /* FetchTvShows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTvShows.swift; sourceTree = "<group>"; };
-		60746D3C28AC5893003A5BFB /* FetchSimilarsFromID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchSimilarsFromID.swift; sourceTree = "<group>"; };
-		60746D3E28AC58D0003A5BFB /* FetchDetailsFromSimilarByID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDetailsFromSimilarByID.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,11 +65,9 @@
 			isa = PBXGroup;
 			children = (
 				60746D3628ABC602003A5BFB /* Source File */,
-				60746D3128ABBE2D003A5BFB /* APiManager */,
 				60746D2A28AAF623003A5BFB /* Models */,
 				60746D1A28AAF3B8003A5BFB /* ViewController.swift */,
 				60746D3428ABC5F5003A5BFB /* ActorCustomEvents.swift */,
-				60746D3B28AC583E003A5BFB /* ActorExtensions */,
 				60746D1C28AAF3B8003A5BFB /* Main.storyboard */,
 				60746D1F28AAF3B8003A5BFB /* Assets.xcassets */,
 				60746D2128AAF3B8003A5BFB /* LaunchScreen.storyboard */,
@@ -94,13 +86,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		60746D3128ABBE2D003A5BFB /* APiManager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = APiManager;
-			sourceTree = "<group>";
-		};
 		60746D3628ABC602003A5BFB /* Source File */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,16 +93,6 @@
 				60746D1828AAF3B8003A5BFB /* SceneDelegate.swift */,
 			);
 			path = "Source File";
-			sourceTree = "<group>";
-		};
-		60746D3B28AC583E003A5BFB /* ActorExtensions */ = {
-			isa = PBXGroup;
-			children = (
-				60746D3928AC57DE003A5BFB /* FetchTvShows.swift */,
-				60746D3C28AC5893003A5BFB /* FetchSimilarsFromID.swift */,
-				60746D3E28AC58D0003A5BFB /* FetchDetailsFromSimilarByID.swift */,
-			);
-			path = ActorExtensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,14 +167,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				60746D1B28AAF3B8003A5BFB /* ViewController.swift in Sources */,
-				60746D3D28AC5893003A5BFB /* FetchSimilarsFromID.swift in Sources */,
 				60746D1728AAF3B8003A5BFB /* AppDelegate.swift in Sources */,
 				60746D2E28ABB9DD003A5BFB /* SameShowModel.swift in Sources */,
 				60746D3528ABC5F5003A5BFB /* ActorCustomEvents.swift in Sources */,
 				60746D1928AAF3B8003A5BFB /* SceneDelegate.swift in Sources */,
 				60746D3028ABBDE5003A5BFB /* DetailsModel.swift in Sources */,
-				60746D3A28AC57DE003A5BFB /* FetchTvShows.swift in Sources */,
-				60746D3F28AC58D0003A5BFB /* FetchDetailsFromSimilarByID.swift in Sources */,
 				60746D2C28AAF632003A5BFB /* TvShowModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
